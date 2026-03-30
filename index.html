@@ -30,6 +30,12 @@
             background-color: var(--noir);
             color: var(--blanc);
             overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        html {
+            scroll-behavior: smooth;
         }
 
         /* Bandeau défilant */
@@ -40,7 +46,7 @@
             padding: 12px 0;
             position: fixed;
             top: 0;
-            z-index: 1000;
+            z-index: 1001;
             box-shadow: 0 4px 20px var(--rouge-glow);
         }
 
@@ -100,8 +106,8 @@
         }
 
         @keyframes blink {
-            0%, 50%, 100% { opacity: 1; }
-            25%, 75% { opacity: 0.6; }
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
         }
 
         /* Hero Section avec Parallaxe */
@@ -119,6 +125,7 @@
             background-attachment: fixed;
             position: relative;
             overflow: hidden;
+            will-change: transform;
         }
 
         .hero::before {
@@ -239,6 +246,7 @@
             justify-content: center;
             position: relative;
             overflow: hidden;
+            will-change: transform;
         }
 
         .specialty-item::before {
@@ -269,17 +277,22 @@
             z-index: 2;
             text-align: center;
             padding: 40px;
-            background: rgba(10, 10, 10, 0.7);
+            background: rgba(10, 10, 10, 0.8);
             border: 3px solid var(--rouge);
             border-radius: 20px;
             backdrop-filter: blur(10px);
             box-shadow: 0 0 50px var(--rouge-glow);
             animation: float 3s ease-in-out infinite;
+            will-change: transform;
         }
 
         @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
         }
 
         .specialty-content h2 {
@@ -372,8 +385,8 @@
             background: var(--rouge);
             border-radius: 50%;
             transform: translate(-50%, -50%);
-            transition: width 0.5s, height 0.5s;
-            z-index: 0;
+            transition: width 0.5s ease, height 0.5s ease;
+            z-index: -1;
         }
 
         .tab-btn:hover::before {
@@ -402,7 +415,6 @@
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 30px;
             animation: fadeIn 0.5s;
-            perspective: 1000px;
         }
 
         .menu-content.active {
@@ -419,8 +431,9 @@
             height: 250px;
             position: relative;
             transform-style: preserve-3d;
-            transition: transform 0.6s;
+            transition: transform 0.6s ease-in-out;
             cursor: pointer;
+            perspective: 1000px;
         }
 
         .menu-item:hover {
@@ -433,6 +446,7 @@
             width: 100%;
             height: 100%;
             backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
             border-radius: 15px;
             display: flex;
             flex-direction: column;
@@ -440,11 +454,13 @@
             align-items: center;
             padding: 25px;
             border: 2px solid transparent;
+            transform-style: preserve-3d;
         }
 
         .menu-item-front {
             background: linear-gradient(135deg, var(--gris-light) 0%, var(--gris) 100%);
             box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+            transform: rotateY(0deg);
         }
 
         .menu-item-back {
@@ -596,9 +612,10 @@
             justify-content: center;
             box-shadow: 0 5px 30px var(--rouge-glow);
             cursor: pointer;
-            z-index: 999;
-            transition: all 0.3s;
+            z-index: 1000;
+            transition: all 0.3s ease;
             animation: bounce 2s ease-in-out infinite;
+            text-decoration: none;
         }
 
         .phone-float:hover {
@@ -661,6 +678,39 @@
 
         /* Responsive */
         @media (max-width: 768px) {
+            /* Désactiver parallaxe sur mobile pour éviter bugs */
+            .hero,
+            .specialty-item {
+                background-attachment: scroll;
+            }
+
+            /* Désactiver flip cards sur mobile - tap pour voir détails */
+            .menu-item {
+                height: auto;
+                min-height: 250px;
+            }
+
+            .menu-item:active {
+                transform: rotateY(180deg);
+            }
+
+            .menu-item-front,
+            .menu-item-back {
+                position: relative;
+            }
+
+            .menu-item-back {
+                display: none;
+            }
+
+            .menu-item:active .menu-item-front {
+                display: none;
+            }
+
+            .menu-item:active .menu-item-back {
+                display: flex;
+            }
+
             .stats {
                 gap: 20px;
             }
@@ -700,6 +750,15 @@
 
             .specialty-content h2 {
                 font-size: 3rem;
+            }
+
+            .specialty-content {
+                max-width: 90%;
+            }
+
+            /* Réduire animations sur mobile */
+            .hero::after {
+                display: none;
             }
         }
     </style>
@@ -1124,14 +1183,17 @@
     <script>
         // Compteur animé pour les stats
         function animateCounter(element) {
+            if (element.dataset.animated) return;
+            element.dataset.animated = 'true';
+
             const target = parseFloat(element.getAttribute('data-target'));
             const duration = 2000;
-            const step = target / (duration / 16);
+            const increment = target / (duration / 16);
             let current = 0;
             const isDecimal = target % 1 !== 0;
 
             const timer = setInterval(() => {
-                current += step;
+                current += increment;
                 if (current >= target) {
                     element.textContent = isDecimal ? target.toFixed(1) : Math.round(target);
                     clearInterval(timer);
@@ -1142,42 +1204,44 @@
         }
 
         // Lancer les compteurs au chargement
-        let countersStarted = false;
-        const statNumbers = document.querySelectorAll('.stat-number[data-target]');
-
-        window.addEventListener('scroll', () => {
-            if (!countersStarted) {
-                statNumbers.forEach(num => {
-                    const rect = num.getBoundingClientRect();
-                    if (rect.top < window.innerHeight) {
-                        animateCounter(num);
-                        countersStarted = true;
-                    }
-                });
-            }
-        });
-
-        // Démarrer immédiatement si visible
-        setTimeout(() => {
-            if (!countersStarted) {
-                statNumbers.forEach(animateCounter);
-                countersStarted = true;
-            }
-        }, 1000);
-
-        // Scroll reveal animations
-        const scrollReveal = () => {
-            const reveals = document.querySelectorAll('.scroll-reveal');
-            reveals.forEach(element => {
-                const elementTop = element.getBoundingClientRect().top;
-                const windowHeight = window.innerHeight;
-                if (elementTop < windowHeight - 100) {
-                    element.classList.add('active');
+        const initCounters = () => {
+            const statNumbers = document.querySelectorAll('.stat-number[data-target]');
+            statNumbers.forEach(num => {
+                const rect = num.getBoundingClientRect();
+                if (rect.top < window.innerHeight && !num.dataset.animated) {
+                    animateCounter(num);
                 }
             });
         };
 
-        window.addEventListener('scroll', scrollReveal);
+        // Démarrer après un court délai pour assurer que le DOM est prêt
+        setTimeout(initCounters, 500);
+
+        // Scroll reveal animations avec throttling
+        let scrollTimeout;
+        const scrollReveal = () => {
+            const reveals = document.querySelectorAll('.scroll-reveal');
+            const windowHeight = window.innerHeight;
+            reveals.forEach(element => {
+                if (!element.classList.contains('active')) {
+                    const elementTop = element.getBoundingClientRect().top;
+                    if (elementTop < windowHeight - 100) {
+                        element.classList.add('active');
+                    }
+                }
+            });
+        };
+
+        window.addEventListener('scroll', () => {
+            if (!scrollTimeout) {
+                scrollTimeout = setTimeout(() => {
+                    scrollReveal();
+                    scrollTimeout = null;
+                }, 50);
+            }
+        });
+
+        // Exécuter au chargement
         scrollReveal();
 
         // Menu tabs
@@ -1196,14 +1260,23 @@
             });
         });
 
-        // Effet parallaxe amélioré
-        window.addEventListener('scroll', () => {
-            const scrolled = window.pageYOffset;
-            const hero = document.querySelector('.hero');
-            if (hero) {
-                hero.style.transform = `translateY(${scrolled * 0.5}px)`;
-            }
-        });
+        // Effet parallaxe amélioré (désactivé sur mobile)
+        if (window.innerWidth > 768) {
+            let ticking = false;
+            window.addEventListener('scroll', () => {
+                if (!ticking) {
+                    window.requestAnimationFrame(() => {
+                        const scrolled = window.pageYOffset;
+                        const hero = document.querySelector('.hero');
+                        if (hero && scrolled < window.innerHeight) {
+                            hero.style.transform = `translateY(${scrolled * 0.5}px)`;
+                        }
+                        ticking = false;
+                    });
+                    ticking = true;
+                }
+            });
+        }
     </script>
 </body>
 </html>
