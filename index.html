@@ -3,10 +3,112 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>La Dalle - T'as la dalle ? On s'en occupe.</title>
+    <title>La Dalle - T'as la dalle ? On s'en occupe. | Burgers, Tacos & Snacks à Morestel</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="La Dalle, le meilleur snack de Morestel ! Burgers, tacos, sandwichs et kebabs faits maison. Livraison rapide 7j/7. Note Google 4.8/5 avec plus de 250 avis. Commandez maintenant !">
+    <meta name="keywords" content="la dalle, snack morestel, burger morestel, tacos morestel, kebab morestel, fast food morestel, livraison morestel, restaurant morestel, tacos fait maison, burger artisanal, 38510">
+    <meta name="author" content="La Dalle">
+    <meta name="robots" content="index, follow">
+    <meta name="language" content="fr">
+    <meta name="revisit-after" content="7 days">
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://snack-demo-rho.vercel.app/">
+
+    <!-- Sitemap -->
+    <link rel="sitemap" type="application/xml" href="/sitemap.xml">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://snack-demo-rho.vercel.app/">
+    <meta property="og:title" content="La Dalle - T'as la dalle ? On s'en occupe. | Meilleur Snack de Morestel">
+    <meta property="og:description" content="Découvrez les meilleurs burgers, tacos et sandwichs de Morestel ! Livraison rapide 7j/7. Note Google 4.8/5. Menu du jour à 9,90€ !">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=1200&h=630&q=80">
+    <meta property="og:locale" content="fr_FR">
+    <meta property="og:site_name" content="La Dalle">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://snack-demo-rho.vercel.app/">
+    <meta property="twitter:title" content="La Dalle - T'as la dalle ? On s'en occupe.">
+    <meta property="twitter:description" content="Meilleurs burgers, tacos et sandwichs de Morestel. Livraison 7j/7 !">
+    <meta property="twitter:image" content="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=1200&h=630&q=80">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+
+    <!-- Schema.org JSON-LD Restaurant -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Restaurant",
+      "name": "La Dalle",
+      "image": "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=1200&h=630&q=80",
+      "description": "Snack et restaurant rapide à Morestel proposant burgers, tacos, sandwichs et kebabs faits maison. Livraison rapide 7j/7.",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "15 Rue de la République",
+        "addressLocality": "Morestel",
+        "postalCode": "38510",
+        "addressCountry": "FR"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 45.6833,
+        "longitude": 5.4667
+      },
+      "telephone": "+33600000000",
+      "email": "contact@ladalle.fr",
+      "url": "https://snack-demo-rho.vercel.app",
+      "priceRange": "€€",
+      "servesCuisine": "Fast Food, Burgers, Tacos",
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday"],
+          "opens": "11:00",
+          "closes": "14:00"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday"],
+          "opens": "18:00",
+          "closes": "22:00"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Friday", "Saturday"],
+          "opens": "11:00",
+          "closes": "23:00"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": "Sunday",
+          "opens": "18:00",
+          "closes": "22:00"
+        }
+      ],
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.8",
+        "ratingCount": "250",
+        "bestRating": "5",
+        "worstRating": "1"
+      },
+      "menu": "https://snack-demo-rho.vercel.app/#menu",
+      "acceptsReservations": "False",
+      "hasDeliveryService": {
+        "@type": "DeliveryService",
+        "name": "Livraison La Dalle"
+      }
+    }
+    </script>
     <style>
         * {
             margin: 0;
@@ -426,48 +528,21 @@
             to { opacity: 1; }
         }
 
-        /* Flip Cards */
+        /* Menu Items - Simple Hover Effect */
         .menu-item {
-            height: 250px;
-            position: relative;
-            transform-style: preserve-3d;
-            transition: transform 0.6s ease-in-out;
+            background: linear-gradient(135deg, var(--gris-light) 0%, var(--gris) 100%);
+            padding: 25px;
+            border-radius: 15px;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
             cursor: pointer;
-            perspective: 1000px;
         }
 
         .menu-item:hover {
-            transform: rotateY(180deg);
-        }
-
-        .menu-item-front,
-        .menu-item-back {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            backface-visibility: hidden;
-            -webkit-backface-visibility: hidden;
-            border-radius: 15px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 25px;
-            border: 2px solid transparent;
-            transform-style: preserve-3d;
-        }
-
-        .menu-item-front {
-            background: linear-gradient(135deg, var(--gris-light) 0%, var(--gris) 100%);
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
-            transform: rotateY(0deg);
-        }
-
-        .menu-item-back {
-            background: linear-gradient(135deg, var(--rouge-dark) 0%, var(--noir) 100%);
-            transform: rotateY(180deg);
             border-color: var(--rouge);
-            box-shadow: 0 5px 30px var(--rouge-glow);
+            box-shadow: 0 10px 40px var(--rouge-glow), inset 0 0 30px rgba(255, 0, 0, 0.1);
+            transform: translateY(-5px) scale(1.02);
         }
 
         .menu-item h3 {
@@ -484,6 +559,7 @@
             margin-bottom: 15px;
             letter-spacing: 1px;
             text-align: center;
+            line-height: 1.5;
         }
 
         .price {
@@ -491,6 +567,8 @@
             color: var(--blanc);
             font-weight: bold;
             text-shadow: 0 0 15px var(--rouge-glow);
+            display: block;
+            margin-top: 10px;
         }
 
         /* Avis Section */
@@ -684,33 +762,6 @@
                 background-attachment: scroll;
             }
 
-            /* Désactiver flip cards sur mobile - tap pour voir détails */
-            .menu-item {
-                height: auto;
-                min-height: 250px;
-            }
-
-            .menu-item:active {
-                transform: rotateY(180deg);
-            }
-
-            .menu-item-front,
-            .menu-item-back {
-                position: relative;
-            }
-
-            .menu-item-back {
-                display: none;
-            }
-
-            .menu-item:active .menu-item-front {
-                display: none;
-            }
-
-            .menu-item:active .menu-item-back {
-                display: flex;
-            }
-
             .stats {
                 gap: 20px;
             }
@@ -841,253 +892,133 @@
 
         <div id="burgers" class="menu-content active">
             <div class="menu-item">
-                <div class="menu-item-front">
-                    <h3>Le Classique</h3>
-                    <span class="price">8,50€</span>
-                </div>
-                <div class="menu-item-back">
-                    <p>Steak haché, salade, tomate, oignons, cornichons, sauce maison</p>
-                    <span class="price">8,50€</span>
-                </div>
+                <h3>Le Classique</h3>
+                <p>Steak haché, salade, tomate, oignons, cornichons, sauce maison</p>
+                <span class="price">8,50€</span>
             </div>
             <div class="menu-item">
-                <div class="menu-item-front">
-                    <h3>Le Bacon</h3>
-                    <span class="price">10,00€</span>
-                </div>
-                <div class="menu-item-back">
-                    <p>Steak haché, bacon croustillant, cheddar, oignons caramélisés, sauce BBQ</p>
-                    <span class="price">10,00€</span>
-                </div>
+                <h3>Le Bacon</h3>
+                <p>Steak haché, bacon croustillant, cheddar, oignons caramélisés, sauce BBQ</p>
+                <span class="price">10,00€</span>
             </div>
             <div class="menu-item">
-                <div class="menu-item-front">
-                    <h3>Le Fromager</h3>
-                    <span class="price">11,50€</span>
-                </div>
-                <div class="menu-item-back">
-                    <p>Double steak, cheddar, emmental, mozzarella, sauce fromagère</p>
-                    <span class="price">11,50€</span>
-                </div>
+                <h3>Le Fromager</h3>
+                <p>Double steak, cheddar, emmental, mozzarella, sauce fromagère</p>
+                <span class="price">11,50€</span>
             </div>
             <div class="menu-item">
-                <div class="menu-item-front">
-                    <h3>Le Poulet Crispy</h3>
-                    <span class="price">9,00€</span>
-                </div>
-                <div class="menu-item-back">
-                    <p>Poulet pané croustillant, salade, tomate, mayo épicée</p>
-                    <span class="price">9,00€</span>
-                </div>
+                <h3>Le Poulet Crispy</h3>
+                <p>Poulet pané croustillant, salade, tomate, mayo épicée</p>
+                <span class="price">9,00€</span>
             </div>
             <div class="menu-item">
-                <div class="menu-item-front">
-                    <h3>Le Végétarien</h3>
-                    <span class="price">9,50€</span>
-                </div>
-                <div class="menu-item-back">
-                    <p>Steak végétal, avocat, salade, tomate, oignons rouges, sauce curry</p>
-                    <span class="price">9,50€</span>
-                </div>
+                <h3>Le Végétarien</h3>
+                <p>Steak végétal, avocat, salade, tomate, oignons rouges, sauce curry</p>
+                <span class="price">9,50€</span>
             </div>
             <div class="menu-item">
-                <div class="menu-item-front">
-                    <h3>Le XL</h3>
-                    <span class="price">14,00€</span>
-                </div>
-                <div class="menu-item-back">
-                    <p>Triple steak, triple cheddar, bacon, oignons frits, sauce spéciale</p>
-                    <span class="price">14,00€</span>
-                </div>
+                <h3>Le XL</h3>
+                <p>Triple steak, triple cheddar, bacon, oignons frits, sauce spéciale</p>
+                <span class="price">14,00€</span>
             </div>
         </div>
 
         <div id="tacos" class="menu-content">
             <div class="menu-item">
-                <div class="menu-item-front">
-                    <h3>Tacos Simple</h3>
-                    <span class="price">7,00€</span>
-                </div>
-                <div class="menu-item-back">
-                    <p>1 viande au choix, frites, salade, tomate, sauce</p>
-                    <span class="price">7,00€</span>
-                </div>
+                <h3>Tacos Simple</h3>
+                <p>1 viande au choix, frites, salade, tomate, sauce</p>
+                <span class="price">7,00€</span>
             </div>
             <div class="menu-item">
-                <div class="menu-item-front">
-                    <h3>Tacos Double</h3>
-                    <span class="price">8,50€</span>
-                </div>
-                <div class="menu-item-back">
-                    <p>2 viandes au choix, frites, salade, tomate, sauce</p>
-                    <span class="price">8,50€</span>
-                </div>
+                <h3>Tacos Double</h3>
+                <p>2 viandes au choix, frites, salade, tomate, sauce</p>
+                <span class="price">8,50€</span>
             </div>
             <div class="menu-item">
-                <div class="menu-item-front">
-                    <h3>Tacos Triple</h3>
-                    <span class="price">10,00€</span>
-                </div>
-                <div class="menu-item-back">
-                    <p>3 viandes au choix, frites, salade, tomate, sauce</p>
-                    <span class="price">10,00€</span>
-                </div>
+                <h3>Tacos Triple</h3>
+                <p>3 viandes au choix, frites, salade, tomate, sauce</p>
+                <span class="price">10,00€</span>
             </div>
             <div class="menu-item">
-                <div class="menu-item-front">
-                    <h3>Tacos Poulet Crispy</h3>
-                    <span class="price">8,00€</span>
-                </div>
-                <div class="menu-item-back">
-                    <p>Poulet pané, frites, salade, tomate, sauce mayo épicée</p>
-                    <span class="price">8,00€</span>
-                </div>
+                <h3>Tacos Poulet Crispy</h3>
+                <p>Poulet pané, frites, salade, tomate, sauce mayo épicée</p>
+                <span class="price">8,00€</span>
             </div>
             <div class="menu-item">
-                <div class="menu-item-front">
-                    <h3>Tacos Végétarien</h3>
-                    <span class="price">7,50€</span>
-                </div>
-                <div class="menu-item-back">
-                    <p>Falafels, frites, salade, tomate, sauce curry</p>
-                    <span class="price">7,50€</span>
-                </div>
+                <h3>Tacos Végétarien</h3>
+                <p>Falafels, frites, salade, tomate, sauce curry</p>
+                <span class="price">7,50€</span>
             </div>
             <div class="menu-item">
-                <div class="menu-item-front">
-                    <h3>Tacos XXL</h3>
-                    <span class="price">12,50€</span>
-                </div>
-                <div class="menu-item-back">
-                    <p>4 viandes au choix, double frites, cheddar, sauce</p>
-                    <span class="price">12,50€</span>
-                </div>
+                <h3>Tacos XXL</h3>
+                <p>4 viandes au choix, double frites, cheddar, sauce</p>
+                <span class="price">12,50€</span>
             </div>
         </div>
 
         <div id="sandwichs" class="menu-content">
             <div class="menu-item">
-                <div class="menu-item-front">
-                    <h3>Kebab</h3>
-                    <span class="price">6,50€</span>
-                </div>
-                <div class="menu-item-back">
-                    <p>Viande kebab, salade, tomate, oignons, sauce blanche</p>
-                    <span class="price">6,50€</span>
-                </div>
+                <h3>Kebab</h3>
+                <p>Viande kebab, salade, tomate, oignons, sauce blanche</p>
+                <span class="price">6,50€</span>
             </div>
             <div class="menu-item">
-                <div class="menu-item-front">
-                    <h3>Panini Poulet</h3>
-                    <span class="price">6,00€</span>
-                </div>
-                <div class="menu-item-back">
-                    <p>Poulet grillé, emmental, tomate, pesto</p>
-                    <span class="price">6,00€</span>
-                </div>
+                <h3>Panini Poulet</h3>
+                <p>Poulet grillé, emmental, tomate, pesto</p>
+                <span class="price">6,00€</span>
             </div>
             <div class="menu-item">
-                <div class="menu-item-front">
-                    <h3>Panini 3 Fromages</h3>
-                    <span class="price">5,50€</span>
-                </div>
-                <div class="menu-item-back">
-                    <p>Emmental, mozzarella, cheddar, tomate</p>
-                    <span class="price">5,50€</span>
-                </div>
+                <h3>Panini 3 Fromages</h3>
+                <p>Emmental, mozzarella, cheddar, tomate</p>
+                <span class="price">5,50€</span>
             </div>
             <div class="menu-item">
-                <div class="menu-item-front">
-                    <h3>Wrap Poulet Caesar</h3>
-                    <span class="price">7,00€</span>
-                </div>
-                <div class="menu-item-back">
-                    <p>Poulet grillé, salade, parmesan, sauce caesar</p>
-                    <span class="price">7,00€</span>
-                </div>
+                <h3>Wrap Poulet Caesar</h3>
+                <p>Poulet grillé, salade, parmesan, sauce caesar</p>
+                <span class="price">7,00€</span>
             </div>
             <div class="menu-item">
-                <div class="menu-item-front">
-                    <h3>Croque-Monsieur</h3>
-                    <span class="price">5,00€</span>
-                </div>
-                <div class="menu-item-back">
-                    <p>Jambon, emmental, sauce béchamel</p>
-                    <span class="price">5,00€</span>
-                </div>
+                <h3>Croque-Monsieur</h3>
+                <p>Jambon, emmental, sauce béchamel</p>
+                <span class="price">5,00€</span>
             </div>
             <div class="menu-item">
-                <div class="menu-item-front">
-                    <h3>Sandwich Végétarien</h3>
-                    <span class="price">6,50€</span>
-                </div>
-                <div class="menu-item-back">
-                    <p>Falafels, salade, tomate, concombre, sauce tahini</p>
-                    <span class="price">6,50€</span>
-                </div>
+                <h3>Sandwich Végétarien</h3>
+                <p>Falafels, salade, tomate, concombre, sauce tahini</p>
+                <span class="price">6,50€</span>
             </div>
         </div>
 
         <div id="boissons" class="menu-content">
             <div class="menu-item">
-                <div class="menu-item-front">
-                    <h3>Coca-Cola</h3>
-                    <span class="price">2,00€</span>
-                </div>
-                <div class="menu-item-back">
-                    <p>33cl canette</p>
-                    <span class="price">2,00€</span>
-                </div>
+                <h3>Coca-Cola</h3>
+                <p>33cl canette</p>
+                <span class="price">2,00€</span>
             </div>
             <div class="menu-item">
-                <div class="menu-item-front">
-                    <h3>Coca-Cola Zero</h3>
-                    <span class="price">2,00€</span>
-                </div>
-                <div class="menu-item-back">
-                    <p>33cl canette</p>
-                    <span class="price">2,00€</span>
-                </div>
+                <h3>Coca-Cola Zero</h3>
+                <p>33cl canette</p>
+                <span class="price">2,00€</span>
             </div>
             <div class="menu-item">
-                <div class="menu-item-front">
-                    <h3>Fanta Orange</h3>
-                    <span class="price">2,00€</span>
-                </div>
-                <div class="menu-item-back">
-                    <p>33cl canette</p>
-                    <span class="price">2,00€</span>
-                </div>
+                <h3>Fanta Orange</h3>
+                <p>33cl canette</p>
+                <span class="price">2,00€</span>
             </div>
             <div class="menu-item">
-                <div class="menu-item-front">
-                    <h3>Sprite</h3>
-                    <span class="price">2,00€</span>
-                </div>
-                <div class="menu-item-back">
-                    <p>33cl canette</p>
-                    <span class="price">2,00€</span>
-                </div>
+                <h3>Sprite</h3>
+                <p>33cl canette</p>
+                <span class="price">2,00€</span>
             </div>
             <div class="menu-item">
-                <div class="menu-item-front">
-                    <h3>Ice Tea</h3>
-                    <span class="price">2,00€</span>
-                </div>
-                <div class="menu-item-back">
-                    <p>33cl canette</p>
-                    <span class="price">2,00€</span>
-                </div>
+                <h3>Ice Tea</h3>
+                <p>33cl canette</p>
+                <span class="price">2,00€</span>
             </div>
             <div class="menu-item">
-                <div class="menu-item-front">
-                    <h3>Eau Minérale</h3>
-                    <span class="price">1,50€</span>
-                </div>
-                <div class="menu-item-back">
-                    <p>50cl bouteille</p>
-                    <span class="price">1,50€</span>
-                </div>
+                <h3>Eau Minérale</h3>
+                <p>50cl bouteille</p>
+                <span class="price">1,50€</span>
             </div>
         </div>
     </section>
@@ -1171,7 +1102,7 @@
     </section>
 
     <!-- Bouton flottant téléphone -->
-    <a href="tel:0474800000" class="phone-float">
+    <a href="tel:0600000000" class="phone-float">
         <span class="phone-tooltip">Commander par téléphone</span>
     </a>
 
